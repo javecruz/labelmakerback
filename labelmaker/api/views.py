@@ -25,10 +25,12 @@ class LabelView(viewsets.ModelViewSet):
 
 
 class UserList(generics.ListAPIView):
+    permission_classes = [AllowAny]  # DEMO PURPOSES
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
 
 
 class UserDetail(generics.RetrieveAPIView):
+    permission_classes = [AllowAny]  # DEMO PURPOSES
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
