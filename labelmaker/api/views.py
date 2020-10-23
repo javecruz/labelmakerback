@@ -34,3 +34,10 @@ class UserDetail(generics.RetrieveAPIView):
     permission_classes = [AllowAny]  # DEMO PURPOSES
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
+
+
+class UserCreate(generics.CreateAPIView):
+    permission_classes = [AllowAny]
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+

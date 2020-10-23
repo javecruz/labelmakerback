@@ -12,8 +12,22 @@ class LabelSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    labels = serializers.PrimaryKeyRelatedField(many=True, queryset=Label.objects.all())
+    labels = serializers.PrimaryKeyRelatedField(many=True, queryset=Label.objects.all(), required=False)
+    extra_kwargs = {'password': {'write_only': True}}
 
     class Meta:
         model = CustomUser
-        fields = ['email', 'labels']
+        fields = ['email', 'labels', 'password']
+
+    def to_representation(self, instance):
+        rep = super(UserSerializer, self).to_representation(instance)
+        rep.pop('password', None)  # this avoid returning password in views
+        return rep
+
+    def create(self, validated_data):
+        user = CustomUser(
+            email=validated_data['email']
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
