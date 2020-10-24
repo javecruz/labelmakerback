@@ -55,6 +55,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL=True
+CORS_ALLOW_HEADERS = ('content-type', 'Authorization')
 
 ROOT_URLCONF = 'labelmaker.urls'
 
